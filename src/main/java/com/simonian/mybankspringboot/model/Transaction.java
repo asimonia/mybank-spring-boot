@@ -2,12 +2,16 @@ package com.simonian.mybankspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
+@Table("transactions")
 public class Transaction {
 
+    @Id
     private String id;
 
     private BigDecimal amount;

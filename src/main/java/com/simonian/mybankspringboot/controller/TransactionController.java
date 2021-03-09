@@ -3,13 +3,9 @@ package com.simonian.mybankspringboot.controller;
 import com.simonian.mybankspringboot.dto.TransactionDTO;
 import com.simonian.mybankspringboot.model.Transaction;
 import com.simonian.mybankspringboot.service.TransactionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 public class TransactionController {
@@ -21,8 +17,13 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions")
-    public List<Transaction> transactions() {
+    public Iterable<Transaction> transactions() {
         return transactionService.findAll();
+    }
+
+    @GetMapping("/transactions/{userId}")
+    public Iterable<Transaction> transactions(@PathVariable String userId) {
+        return transactionService.findByReceivingUserId(userId);
     }
 
     @PostMapping("/transactions")
